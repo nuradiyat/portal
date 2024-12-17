@@ -1,5 +1,5 @@
 
-# Filament Demo App
+# Portal Berita 
 
 A demo application to illustrate how Filament Admin works.
 
@@ -8,12 +8,6 @@ A demo application to illustrate how Filament Admin works.
 [Open in Gitpod](https://gitpod.io/#https://github.com/filamentphp/demo) to edit it and preview your changes with no setup required.
 
 ## Installation
-
-Clone the repo locally:
-
-```sh
-git clone https://github.com/laravel-filament/demo.git filament-demo && cd filament-demo
-```
 
 Install PHP dependencies:
 
