@@ -25,10 +25,11 @@ class CommentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('article_id')
-                    ->relationship('article', 'name') // Relasi ke Category
+                    // Relasi ke article seusai kan nama fungsi nya categori di model coment
+                    ->relationship('article', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('name'),
-                Forms\Components\Textarea::make('content')
+                Forms\Components\RichEditor::make('content')
                     ->label('Komentar')
                     ->required(),
                 Forms\Components\DatePicker::make('published_at')
@@ -51,7 +52,8 @@ class CommentResource extends Resource
                 Tables\Columns\TextColumn::make('published_at'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('article_id')
+                ->relationship('article', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

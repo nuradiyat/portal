@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+// use Filament\Forms\Components\RichEditor;
 
 class ArticleResource extends Resource
 {
@@ -32,7 +33,8 @@ class ArticleResource extends Resource
                     ->label('Judul')
                     ->required(),
                 Forms\Components\Select::make('categori_id')
-                    ->relationship('categori', 'name') // Relasi ke Category
+                    // Relasi ke categori seusai kan dengan nama fungsi nya categori di model article
+                    ->relationship('categori', 'name')
                     ->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name') // Relasi ke user
@@ -49,10 +51,12 @@ class ArticleResource extends Resource
                 Forms\Components\DatePicker::make('published_at')
                     ->required()
                     ->maxDate(now()),
+                Forms\Components\RichEditor::make('content')
+                    ->required(),
+                // ini kan ada tred nya ya use Filament\Forms\Components\FileUpload; kalo g mau ada tred
+                // Forms\Components\DatePicker gini Forms\Components\FileUpload
                 FileUpload::make('image')
                     ->image()
-                    ->required(),
-                Forms\Components\Textarea::make('content')
                     ->required(),
             ]);
     }
@@ -77,7 +81,8 @@ class ArticleResource extends Resource
                 Tables\Columns\TextColumn::make('published_at'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('categori_id')
+                ->relationship('categori', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
